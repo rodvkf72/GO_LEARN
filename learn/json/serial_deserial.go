@@ -36,3 +36,5 @@ func main() {
 	}
 	fmt.Println(string(b))
 }
+
+//*important : JSON package serializes only uppercase fields
