@@ -23,7 +23,7 @@ func NewDeadline(t time.Time) *Deadline {
 	return &Deadline{t}
 }
 
-func main() {
+func Example_marshalJSON() {
 	t := Task{
 		Title:    "Laundry",
 		Status:   2,
@@ -35,6 +35,24 @@ func main() {
 		return
 	}
 	fmt.Println(string(b))
+}
+
+func Example_unmarshalJSON() {
+	b := []byte(`{"Title":"Buy Bilk","Status":2,"Deadline":"2020-01-25T15:40:00Z"}`) //not ''
+	t := Task{}
+	err := json.Unmarshal(b, &t)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	fmt.Println(t.Title)
+	fmt.Println(t.Status)
+	fmt.Println(t.Deadline.UTC())
+}
+
+func main() {
+	Example_marshalJSON()
+	Example_unmarshalJSON()
 }
 
 //*important : JSON package serializes only uppercase fields
