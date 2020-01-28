@@ -6,17 +6,17 @@ import (
 )
 
 type Fields struct {
-	VisibleField   string
-	InvisibleField string
+	VisibleField   string `json:"visibleField"`
+	InvisibleField string `json:"invisibleField"`
 }
 
 func ExampleOmitFields() {
 	f := &Fields{"a", "b"}
 	b, _ := json.Marshal(struct {
 		*Fields
-		InvisibleField string `json:",omitempty"` // <-- exclude Field
-		Additional     string
-		Additional2    string
+		InvisibleField string `json:"invisibleField,omitempty"` // <-- exclude Field
+		Additional     string `json:"additional"`
+		Additional2    string `json:"additional2"`
 	}{Fields: f, Additional: "c", Additional2: "d"})
 	fmt.Println(string(b))
 }
